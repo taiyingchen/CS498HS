@@ -43,18 +43,18 @@ python query.py nodes.txt network1_edges.txt sports
 of pagerank for network2.
 
 ```bash
-python hw1.py nodes.txt network2_edges.txt politics
+python query.py nodes.txt network2_edges.txt politics
 ```
 
 3. Plot a graph showing the variation in page rank value of node with id 2 for network1
 over 100 iterations.
 
 ```bash
-python hw1_plot.py nodes.txt network1_edges.txt 2
+python plot.py nodes.txt network1_edges.txt 2
 ```
 
 4. Plot a graph showing the variation in page rank value of node with id 2 for network2 over 100 iterations.
 
 ```bash
-python hw1_plot.py nodes.txt network2_edges.txt 2
+python plot.py nodes.txt network2_edges.txt 2
 ```
