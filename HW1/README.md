@@ -17,6 +17,8 @@ pip install matplotlib
 
 ## Usage
 
+### Example
+
 `query.py`
 
 ```bash
@@ -28,6 +30,8 @@ python query.py NODE_FILE_NAME EDGE_FILE_NAME CATEGORY
 ```bash
 python plot.py NODE_FILE_NAME EDGE_FILE_NAME NODE_ID
 ```
+
+### Usage for Programming Questions
 
 1. For a search query on category Sports, list out the top-10 nodes in decreasing order of pagerank for network1.
 
