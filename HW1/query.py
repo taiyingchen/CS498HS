@@ -3,6 +3,7 @@ import networkx as nx
 from collections import defaultdict
 import sys
 
+
 def read_nodes(filename):
     node2category = {}
     category2node = defaultdict(list)
@@ -13,6 +14,7 @@ def read_nodes(filename):
             category2node[category].append(index)
     return node2category, category2node
 
+
 def read_edges(filename):
     edges = []
     with open(filename, 'r') as file:
@@ -21,10 +23,12 @@ def read_edges(filename):
             edges.append((node1, node2))
     return edges
 
+
 def create_graph(edges):
     G = nx.DiGraph()
     G.add_edges_from(edges)
     return G
+
 
 def main(argv):
     nodes_filename = argv[1]
@@ -42,7 +46,7 @@ def main(argv):
     print('No.\tNode\tValue')
     for index, (node, value) in enumerate(sorted_pr):
         print(index+1, '\t', node, '\t', value)
-    
+
     # List nodes related to the query
     query_nodes = category2node[query]
     query_pagerank = []
@@ -51,7 +55,7 @@ def main(argv):
 
     # Sort in decreasing order
     query_pagerank = sorted(query_pagerank, key=lambda k: k[1], reverse=True)
-    
+
     # Print out the result
     print('No.\tNode\tValue')
     for index, (node, value) in enumerate(query_pagerank):
@@ -60,6 +64,7 @@ def main(argv):
     # Plot the graph
     nx.draw(G, with_labels=True)
     plt.show()
+
 
 if __name__ == "__main__":
     main(sys.argv)
