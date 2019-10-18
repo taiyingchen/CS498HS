@@ -6,7 +6,7 @@ Apply the page rank algorithm on the graphs separately for 100 iterations. You a
 
 ## Programming Language
 
-Python 3.6
+Python 3.7
 
 ## Requirements
 
