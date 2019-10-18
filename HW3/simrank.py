@@ -260,7 +260,7 @@ def main(argv):
     users, ads, user_links, ad_links = parse_intput(inputs)
 
     # Run SimRank algorithm
-    user_sim, ad_sim = simrank(users, ads, user_links, ad_links, iteration, C1, C2)
+    user_sim, ad_sim = simrank_partial_sums(users, ads, user_links, ad_links, iteration, C1, C2)
 
     # Output results from simple SimRank algorithm
     output = []
