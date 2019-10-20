@@ -24,7 +24,7 @@ Python 3.7
 ## Usage
 
 ```bash
-python3 simrank.py INPUT_FILENAME OUTPUT_FILENAME
+python3 simrank.py INPUT_FILE_NAME OUTPUT_FILE_NAME
 ```
 
 ### Example
@@ -37,7 +37,7 @@ python3 simrank.py input_b.txt output.txt
 
 ### `simrank`
 
-Function `simrank` is an implentation of SimRank algorithm from the original paper [SimRank: A Measure of Structural-Context Similarity](http://ilpubs.stanford.edu:8090/508/1/2001-41.pdf). In each iteration it alternatively updates the user similarity the ad similarity with the following formula. Its time complexity is $O(Kd^2n^2)$, where $K$ is the number of iterations, $d$ is average degree of a graph, and $n$ is the number of nodes in a graph.
+Function `simrank` is an implentation of SimRank algorithm from the original paper [SimRank: A Measure of Structural-Context Similarity](http://ilpubs.stanford.edu:8090/508/1/2001-41.pdf). In each iteration it alternatively updates the user similarities and the ad similarities with the following formula. Its time complexity is $O(Kd^2n^2)$, where $K$ is the number of iterations, $d$ is average degree of a graph, and $n$ is the number of nodes in a graph.
 
 $$
 s(q,q') = \frac{C_1}{N(q)N(q')}\sum_{i\in E(q)}\sum_{j\in E(q')}s(i,j)
