@@ -51,6 +51,34 @@ def main(argv):
     # output_filename = argv[2]
 
     ratings, movies, queries = read_input(input_filename)
+    
+    
+    user_ratings = defaultdict(list)
+    movie_ratings = defaultdict(list)
+    global_mean = []
+    for user, movie, rating in ratings:
+        user_ratings[user].append((movie, rating))
+        movie_ratings[movie].append((user, rating))
+        global_mean.append(rating)
+    global_mean = sum(global_mean) / len(ratings)
+
+    # Estimate movie biases
+    movie_biases = {}
+    for movie in movie_ratings:
+        # b_i = sum(r_ui - mu) / len(R(i))
+        movie_bias = [rating - global_mean for user, rating in movie_ratings[movie]]
+        movie_bias = sum(movie_bias) / len(movie_bias)
+        movie_biases[movie] = movie_bias
+    
+    # Estimate user biases
+    user_biases = {}
+    for user in user_ratings:
+        # b_u = sum(r_ui - mu - b_i) / len(R(u))
+        user_bias = [rating - global_mean - movie_biases[movie] for movie, rating in user_ratings[user]]
+        user_bias = sum(user_bias) / len(user_bias)
+        user_biases[user] = user_bias
+
+    pass
 
 
 if __name__ == "__main__":
