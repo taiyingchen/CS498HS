@@ -37,7 +37,7 @@ Round rˆ to 1 decimal point.
 
 ## Input format
 
-The input contains the (user,movie) ratings, movie metadata and the (user,movie) pairs for which you need to estimate the ratings.
+The input (`input.txt`) contains the (user,movie) ratings, movie metadata and the (user,movie) pairs for which you need to estimate the ratings.
 
 The first line of the input contains two space separated integers R M. R is the number of lines of user-movie ratings and M is the number of movies. Next R lines contain the ratings. Each line contains three space-separated values (user-id, movie-id, rating). Next M lines contain the metadata. The first entry in each line is the movie id, followed by words describing movie metadata. The last five lines contain two space-separated integers (target user-id, target movie-id) for which you need to estimate the ratings.
 
@@ -60,5 +60,5 @@ python3 recommender.py INPUT_FILE_NAME OUTPUT_FILE_NAME
 ### Example
 
 ```bash
-python3 recommender.py input_b.txt output.txt
+python3 recommender.py input.txt output.txt
 ```
