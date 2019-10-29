@@ -209,6 +209,8 @@ def main(argv):
         for user, movie in queries:
             rating_pearson = recommender.predict(user, movie, 'pearson')
             rating_content = recommender.predict(user, movie, 'content')
+            rating_pearson = round(rating_pearson, 1)
+            rating_content = round(rating_content, 1)
 
             print(f'===== user: {user}, movie: {movie} =====')
             print(f'rating with pearson correlation: {rating_pearson}')
