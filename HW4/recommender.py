@@ -1,5 +1,5 @@
 from collections import defaultdict
-from math import exp
+from math import sqrt
 import sys
 
 
@@ -45,7 +45,6 @@ class Recommender(object):
         self.movie_ratings = defaultdict(lambda: defaultdict(float))
         self.movie_biases = {}
         self.user_biases = {}
-        self.movie_similarities = defaultdict(lambda: defaultdict(float))
 
         for user, movie, rating in ratings:
             self.user_ratings[user][movie] = rating
@@ -76,6 +75,29 @@ class Recommender(object):
             user_bias = sum(user_bias) / len(user_bias)
             self.user_biases[user] = user_bias
 
+
+    def pearson_correlation(self, movie1, movie2):
+        intersect_users = set()
+        for user in self.user_ratings:
+            if movie1 in self.user_ratings[user] and movie2 in self.user_ratings[user]:
+                intersect_users.add(user)
+        
+        # Set pearson correlation to 0 if there is no intersectional user
+        if len(intersect_users) == 0:
+            return 0.
+
+        numerator = 0.
+        denominator = 0.
+        for user in intersect_users:
+            numerator += (self.user_ratings[user][movie1] - self.baseline_predictor(user, movie1)) * (self.user_ratings[user][movie2] - self.baseline_predictor(user, movie2))
+            denominator += (self.user_ratings[user][movie1] - self.baseline_predictor(user, movie1))**2 * (self.user_ratings[user][movie2] - self.baseline_predictor(user, movie2))**2
+        
+        return numerator / sqrt(denominator)
+
+
+    def content_similarity(self, movie1, movie2):
+        pass
+
         
     def baseline_predictor(self, user, movie):
         """Baseline predictor (b_ui)
@@ -83,16 +105,20 @@ class Recommender(object):
         return self.user_biases[user] + self.movie_biases[movie] + self.global_mean
 
     
-    def predict(self, user, movie):
+    def predict(self, user, movie, similarity):
         bias = self.baseline_predictor(user, movie)
 
-        similarity = 0.
-        total_similarity = 0.
+        numerator = 0.
+        denominator = 0.
         for user_movie in self.user_ratings[user]:
-            similarity += self.movie_similarities[movie][user_movie] * (self.user_ratings[user][user_movie] - self.baseline_predictor(user, user_movie))
-            total_similarity += self.movie_similarities[movie][user_movie]
+            if similarity == 'pearson':
+                numerator += self.pearson_correlation(movie, user_movie) * (self.user_ratings[user][user_movie] - self.baseline_predictor(user, user_movie))
+                denominator += self.pearson_correlation(movie, user_movie)
+            elif similarity == 'content':
+                numerator += self.content_similarity(movie, user_movie) * (self.user_ratings[user][user_movie] - self.baseline_predictor(user, user_movie))
+                denominator += self.content_similarity(movie, user_movie)
         
-        return bias + similarity / total_similarity
+        return bias + numerator / denominator
     
 
 def output_result(output, filename):
@@ -112,6 +138,8 @@ def main(argv):
     recommender.estimate_movie_biases()
     recommender.estimate_user_biases()
     
+    v = recommender.predict(15, 7, 'pearson')
+    print(v)
     pass
 
 
