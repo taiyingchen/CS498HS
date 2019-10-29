@@ -22,6 +22,19 @@ where U(i,j) is the set of users who have rated movies i and j, and bui = bu + b
 
 Movie metadata is a collection of words, sij is the cosine similarity between the two movie documents i and j. In order to calculate cosine similarity, we first convert the documents to a vectors using TF-IDF.
 
+**Term Frequency** also known as TF, measures the number of times a term (word) occurs in a document, normalized by document length.
+
+![tf](img/tf.png)
+
+**Inverse Document** Frequency also known as IDF, measures how important a term is to a particular movie.
+
+![idf](img/idf.png)
+
+![cosine](img/cosine.png)
+
+In this MP, given an input (u,i) , you need to output the estimated rating value rˆ . ui
+Round rˆ to 1 decimal point.
+
 ## Input format
 
 The input contains the (user,movie) ratings, movie metadata and the (user,movie) pairs for which you need to estimate the ratings.
