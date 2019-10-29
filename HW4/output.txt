@@ -1,0 +1,15 @@
+user: 15, movie: 7
+rating with pearson correlation: 3.3
+rating with content similarity: 2.3
+user: 15, movie: 177
+rating with pearson correlation: 2.6
+rating with content similarity: 2.2
+user: 19, movie: 921
+rating with pearson correlation: 2.5
+rating with content similarity: 3.8
+user: 20, movie: 1089
+rating with pearson correlation: 4.6
+rating with content similarity: 3.7
+user: 21, movie: 1393
+rating with pearson correlation: 2.5
+rating with content similarity: 3.3
