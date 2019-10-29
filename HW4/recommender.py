@@ -19,8 +19,6 @@ class Recommender(object):
     def __init__(self, ratings):
         self.user_ratings = defaultdict(lambda: defaultdict(float))
         self.movie_ratings = defaultdict(lambda: defaultdict(float))
-        self.movie_biases = {}
-        self.user_biases = {}
 
         for user, movie, rating in ratings:
             self.user_ratings[user][movie] = rating
@@ -29,7 +27,7 @@ class Recommender(object):
         self.global_mean = self.get_global_mean(ratings)
 
     def get_global_mean(self, ratings):
-        """Return the average of all the ratings
+        """Return the average of all the ratings (mu)
         """
         total_ratings = []
         for user, movie, rating in ratings:
@@ -39,6 +37,7 @@ class Recommender(object):
     def estimate_movie_biases(self):
         """Estimate movie biases (b_i)
         """
+        self.movie_biases = {}
         for movie in self.movie_ratings:
             # b_i = sum(r_ui - mu) / len(R(i))
             movie_bias = [rating - self.global_mean for rating in self.movie_ratings[movie].values()]
@@ -48,6 +47,7 @@ class Recommender(object):
     def estimate_user_biases(self):
         """Estimate user bias (b_u)
         """
+        self.user_biases = {}
         for user in self.user_ratings:
             # b_u = sum(r_ui - mu - b_i) / len(R(u))
             user_bias = [rating - self.global_mean - self.movie_biases[movie]
@@ -95,13 +95,15 @@ class Recommender(object):
                     term2index[term] = num_terms
                     num_terms += 1
 
+        # Compute TF (term frequency)
         self.tf = {}  # {movie_id: tf}
         for movie in movies:
             self.tf[movie] = np.zeros(num_terms)
             terms = movies[movie].split()
             for term in terms:
                 self.tf[movie][term2index[term]] += 1
-
+        
+        # Compute IDF (inverse document frequency)
         self.idf = np.zeros(num_terms)
         for term in term2doc_cnt:
             self.idf[term2index[term]] = log(len(movies) / term2doc_cnt[term])
