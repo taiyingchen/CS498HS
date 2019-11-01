@@ -1,4 +1,4 @@
-# Homework 1
+# Homework 1: PageRank
 
 The objective of the programming assignment is to give you a better understanding of page rank. We have provided you two graphs with 100 nodes each. You can find the list of the node ids and their categories in the file nodes.txt. The edges for the graphs can be found in the files network1 edges.txt and network2 edges.txt respectively.
 
