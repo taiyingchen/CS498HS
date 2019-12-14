@@ -8,3 +8,5 @@ UIUC 2019 Fall CS498HS Computational Advertising
 * Homework 2: Auctions and Sponsored Search Markets
 * Homework 3: SimRank Algorithm Implementation
 * Homework 4: Design Movie Recommender System
+* Homework 5: Behavioral Targeting
+* Homework 6: Contextual Advertising
